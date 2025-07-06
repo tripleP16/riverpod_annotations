@@ -1,6 +1,10 @@
 # riverpod_annotations
 
-A new Flutter project.
+This repository is a mini course designed to help you learn and experiment with Riverpod providers in Flutter.
+
+## About This Project
+
+This project serves as a hands-on learning environment for understanding and practicing different types of Riverpod providers. You can use it to try out examples, follow along with tutorials, and deepen your knowledge of state management in Flutter using Riverpod.
 
 ## Getting Started
 
