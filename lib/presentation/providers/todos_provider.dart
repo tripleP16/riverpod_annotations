@@ -73,4 +73,15 @@ class Todos extends _$Todos {
 
     state = [...state, todo];
   }
+
+  void toggle({DateTime? completedAt, required String id}) {
+    final index = state.indexWhere((e) => e.id == id);
+    if (index == -1) return;
+    final updated = state[index].copyWith(completedAt: completedAt);
+    state = [
+      ...state.sublist(0, index),
+      updated,
+      ...state.sublist(index + 1),
+    ];
+  }
 }
