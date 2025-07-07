@@ -1,4 +1,7 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:riverpod_annotations/config/helpers/random_generator.dart';
+import 'package:riverpod_annotations/domain/domain.dart';
+import 'package:uuid/uuid.dart';
 
 part 'todos_provider.g.dart';
 
@@ -12,6 +15,8 @@ enum FilterType {
   const FilterType(this.name);
 }
 
+const uuid = Uuid();
+
 @riverpod
 class TodoCurrentFilter extends _$TodoCurrentFilter {
   @override
@@ -21,5 +26,51 @@ class TodoCurrentFilter extends _$TodoCurrentFilter {
 
   void changeCurrentFilter(FilterType type) {
     state = type;
+  }
+}
+
+@riverpod
+class Todos extends _$Todos {
+  @override
+  List<Todo> build() {
+    return [
+      Todo(
+          id: uuid.v4(),
+          description: RandomGenerator.getRandomName(),
+          completedAt: null),
+      Todo(
+          id: uuid.v4(),
+          description: RandomGenerator.getRandomName(),
+          completedAt: null),
+      Todo(
+          id: uuid.v4(),
+          description: RandomGenerator.getRandomName(),
+          completedAt: null),
+      Todo(
+          id: uuid.v4(),
+          description: RandomGenerator.getRandomName(),
+          completedAt: null),
+      Todo(
+          id: uuid.v4(),
+          description: RandomGenerator.getRandomName(),
+          completedAt: DateTime.now()),
+      Todo(
+          id: uuid.v4(),
+          description: RandomGenerator.getRandomName(),
+          completedAt: DateTime.now()),
+      Todo(
+          id: uuid.v4(),
+          description: RandomGenerator.getRandomName(),
+          completedAt: DateTime.now()),
+    ];
+  }
+
+  void addTodo() {
+    final todo = Todo(
+        id: uuid.v4(),
+        description: RandomGenerator.getRandomName(),
+        completedAt: null);
+
+    state = [...state, todo];
   }
 }
