@@ -1,3 +1,4 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:riverpod_annotations/config/helpers/random_generator.dart';
 import 'package:riverpod_annotations/domain/domain.dart';
@@ -84,4 +85,16 @@ class Todos extends _$Todos {
       ...state.sublist(index + 1),
     ];
   }
+}
+
+@riverpod
+List<Todo> filteredTodos(Ref ref, FilterType type) {
+  final todos = ref.watch(todosProvider);
+  final filteredTodos = {
+    FilterType.all: todos,
+    FilterType.invited: todos.where((e) => e.completedAt != null).toList(),
+    FilterType.pending: todos.where((e) => e.completedAt == null).toList()
+  };
+
+  return filteredTodos[type] ?? todos;
 }
