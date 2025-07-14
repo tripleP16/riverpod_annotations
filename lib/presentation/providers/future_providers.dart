@@ -6,9 +6,22 @@ part 'future_providers.g.dart';
 
 @Riverpod(keepAlive: true)
 Future<String> pokemonName(Ref ref) async {
-  final pokemonInformation = await PokemonInformation.getPokemonName(1);
+  final id = ref.watch(pokemonIdProvider);
+  final pokemonInformation = await PokemonInformation.getPokemonName(id);
   ref.onDispose(() {
     print('estamos a punto de eliminar este provider');
   });
   return pokemonInformation;
+}
+
+@Riverpod(keepAlive: true)
+class PokemonId extends _$PokemonId {
+  @override
+  int build() {
+    return 1;
+  }
+
+  void nextPokemon() => state++;
+
+  void previousPokemon() => state > 1 ? state-- : state;
 }
