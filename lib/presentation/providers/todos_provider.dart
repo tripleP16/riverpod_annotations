@@ -17,7 +17,7 @@ enum FilterType {
 
 const uuid = Uuid();
 
-@riverpod
+@Riverpod(keepAlive: true)
 class TodoCurrentFilter extends _$TodoCurrentFilter {
   @override
   FilterType build() {
@@ -29,7 +29,7 @@ class TodoCurrentFilter extends _$TodoCurrentFilter {
   }
 }
 
-@riverpod
+@Riverpod(keepAlive: true)
 class Todos extends _$Todos {
   @override
   List<Todo> build() {
